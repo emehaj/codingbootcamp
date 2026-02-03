@@ -30,22 +30,24 @@ body {
 main {
     width: 100%;
     max-width: 1000px;
+    height: 500px;
+    display: flex;
+    position: relative;
 
-    & > .slide {
-        display: flex;
+    & > .quotes {
         width: 100%;
         height: 500px;
         position: relative;
+        display: grid;
         align-items: center;
 
         & > .quote {
             width: 100%;
             max-width: 560px;
+            position: absolute;
             height: fit-content;
             display: grid;
-            gap: 40px;
             align-content: center;
-            position: relative;
             transition: opacity 1.5s;
             z-index: 2;
 
@@ -53,6 +55,7 @@ main {
                 font-size: clamp(23px, 1.2vw + 19px, 32px);
                 font-weight: 300;
                 color: hsl(var(--blue950));
+                margin-bottom: 30px;
             }
 
             & > .user {
@@ -87,69 +90,79 @@ main {
         & > .johnQ {
             opacity: 0;
         }
+    }
 
-        & > .profile {
+    & > .profile {
+        position: absolute;
+        width: 50%;
+        height: 100%;
+        right: 0;
+        display: grid;
+        place-items: center;
+
+        & > .profile-img {
             position: absolute;
-            width: 50%;
-            height: 100%;
-            right: 0;
-            display: grid;
-            place-items: center;
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            z-index: 1;
 
-            & > .profile-img {
-                position: absolute;
+            & > .img-container {
+                height: 100%;
                 width: 100%;
-                aspect-ratio: 1 / 1;
-                z-index: 1;
+                position: relative;
+                display: grid;
+                place-items: center;
+                overflow: hidden;
 
-                & > .img-container {
+                & > .slider {
+                    position: absolute;
+                    width: 200%;
                     height: 100%;
-                    width: 100%;
-                    display: flex;
+                    display: grid;
                     gap: 20px;
-                    position: relative;
-                    overflow: hidden;
+                    grid-template-columns: 1fr 1fr;
+                    transition: left 1.5s;
+                    left: 0;
 
                     & > img {
                         width: 100%;
                         height: 100%;
                         border-radius: 5px;
-                        transition: transform 1.5s;
-                    }
-                }
-
-                & > .buttons {
-                    width: 80px;
-                    position: absolute;
-                    bottom: -15px;
-                    left: 30px;
-                    display: flex;
-                    align-items: center;
-                    justify-content: space-between;
-                    padding: 10px 15px;
-                    border-radius: 20px;
-                    background-color: hsl(var(--white));
-                    z-index: 3;
-                    box-shadow: 0 5px 20px -10px hsl(var(--black));
-
-                    & > button {
-                        width: 13px;
-                        height: 18px;
-                        border: none;
-                        outline: none;
-                        background-color: transparent;
-                        cursor: pointer;
                     }
                 }
             }
 
-            & > .pattern {
-                width: 120%;
-                height: fit-content;
-                aspect-ratio: 1 / 1;
+            & > .buttons {
+                width: 80px;
                 position: absolute;
-                z-index: 0;
+                bottom: -15px;
+                left: 30px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 10px 15px;
+                border-radius: 20px;
+                background-color: hsl(var(--white));
+                z-index: 3;
+                box-shadow: 0 5px 20px -10px hsl(var(--black));
+
+                & > button {
+                    width: 13px;
+                    height: 18px;
+                    border: none;
+                    outline: none;
+                    background-color: transparent;
+                    cursor: pointer;
+                }
             }
+        }
+
+        & > .pattern {
+            width: 120%;
+            height: fit-content;
+            aspect-ratio: 1 / 1;
+            position: absolute;
+            z-index: 0;
         }
     }
 }
@@ -163,17 +176,15 @@ main {
     }
 
     main {
-        & > .slide {
-            height: 800px;
-            display: grid;
-            grid-template-areas: "profile" "quote";
+        flex-direction: column-reverse;
+        height: fit-content;
+        align-items: center;
+
+        & > .quotes {
             justify-items: center;
-            align-content: center;
-            gap: 120px;
 
             & > .quote {
                 text-align: center;
-                grid-area: quote;
 
                 & > .user {
                     display: grid;
@@ -187,22 +198,21 @@ main {
                     transform: translateX(-50%);
                 }
             }
+        }
 
-            & > .profile {
-                position: relative;
-                top: 0;
-                grid-area: profile;
+        & > .profile {
+            position: relative;
+            top: 0;
 
-                width: 100%;
-                max-width: 450px;
-                aspect-ratio: 1 / 1;
-                height: unset;
+            width: 100%;
+            max-width: 450px;
+            aspect-ratio: 1 / 1;
+            height: unset;
 
-                & > .profile-img {
-                    & > .buttons {
-                        left: 50%;
-                        transform: translateX(-50%);
-                    }
+            & > .profile-img {
+                & > .buttons {
+                    left: 50%;
+                    transform: translateX(-50%);
                 }
             }
         }
